@@ -1,0 +1,48 @@
+{
+  "name": "spotify-graphql-server",
+  "version": "1.0.0",
+  "description": "GraphQL server for Spotify API",
+  "main": "server.js",
+  "dependencies": {
+    "apollo-datasource-rest": "^0.4.0",
+    "apollo-server-express": "2.5.0",
+    "body-parser": "^1.18.2",
+    "casual": "^1.5.17",
+    "connect": "^3.7.0",
+    "dotenv": "8.0.0",
+    "graphql": "^14.3.1",
+    "graphql-tools": "^4.0.4",
+    "lodash": "^4.17.4",
+    "node-fetch": "^2.6.0",
+    "qs-middleware": "^1.0.3",
+    "sequelize": "^5.8.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-source-map-support": "^1.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "nodemon": "^1.19.1"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "scripts": {
+    "start": "nodemon ./server.js --exec babel-node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quentincrinon/spotify-graphql-server.git"
+  },
+  "author": "Quentin Crinon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quentincrinon/spotify-graphql-server/issues"
+  },
+  "homepage": "https://github.com/quentincrinon/spotify-graphql-server#readme"
+}
