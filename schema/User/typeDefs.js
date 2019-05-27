@@ -16,24 +16,9 @@ const typeDefs = gql`
     followers: Followers
     external_urls: Url
     birthdate: String
-    counrty: String
+    country: String
     email: String
     product: String
-  }
-
-  type Image {
-    height: Int
-    url: String!
-    width: Int
-  }
-
-  type Followers {
-    href: String
-    total: Int
-  }
-
-  type Url {
-    spotify: String
   }
 `;
 

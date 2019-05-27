@@ -1,9 +1,19 @@
 import { ApolloServer, gql } from 'apollo-server-express';
 import connect from 'connect';
 import query from 'qs-middleware';
-import User from './schema/User/typeDefs';
-import resolvers from './schema/User/resolvers';
+import {
+  typeDefs as Shared,
+  resolvers as SharedResolvers
+} from './schema/Shared';
+import { typeDefs as User, resolvers as UserResolvers } from './schema/User';
+import {
+  typeDefs as Artist,
+  resolvers as ArtistResolvers
+} from './schema/Artist';
+import { typeDefs as Album, resolvers as AlbumResolvers } from './schema/Album';
+import { typeDefs as Track, resolvers as TrackResolvers } from './schema/Track';
 import SpotifyAPI from './data-sources/Spotify';
+import { mergeDeep } from 'apollo-utilities';
 
 const GRAPHQL_PORT = 3001;
 
@@ -21,8 +31,14 @@ const Mutation = gql`
 `;
 
 const server = new ApolloServer({
-  typeDefs: [Query, Mutation, User],
-  resolvers,
+  typeDefs: [Query, Mutation, Shared, User, Artist, Album, Track],
+  resolvers: mergeDeep(
+    SharedResolvers,
+    UserResolvers,
+    ArtistResolvers,
+    AlbumResolvers,
+    TrackResolvers
+  ),
   dataSources: () => ({
     spotifyAPI: new SpotifyAPI()
   })
