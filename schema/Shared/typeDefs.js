@@ -15,6 +15,11 @@ const typeDefs = gql`
   type Url {
     spotify: String
   }
+
+  type ExternalIds {
+    upc: String
+    isrc: String
+  }
 `;
 
 export default typeDefs;

@@ -34,6 +34,11 @@ class SpotifyAPI extends RESTDataSource {
     request.headers.set('Authorization', await getToken());
   }
 
+  /**
+   *
+   * USER
+   */
+
   async getUserDetails(user_id) {
     console.log(`getUserDetails: ${user_id}`);
 
@@ -49,6 +54,11 @@ class SpotifyAPI extends RESTDataSource {
 
     return user;
   }
+
+  /**
+   *
+   * ARTIST
+   */
 
   async getArtist(artist_id) {
     console.log(`getArtist: ${artist_id}`);
@@ -84,6 +94,48 @@ class SpotifyAPI extends RESTDataSource {
     );
 
     return top_tracks.tracks;
+  }
+
+  /**
+   *
+   * ALBUM
+   */
+
+  async getAlbum(album_id) {
+    console.log(`getAlbum: ${album_id}`);
+
+    const album = await this.get(`/albums/${album_id}`);
+
+    return album;
+  }
+
+  async getAlbumTracks(album_id) {
+    console.log(`getAlbumTracks: ${album_id}`);
+
+    const tracks = await this.get(`/albums/${album_id}/tracks`);
+
+    return tracks.items;
+  }
+
+  /**
+   *
+   * TRACK
+   */
+
+  async getTrack(track_id) {
+    console.log(`getTrack: ${track_id}`);
+
+    const track = await this.get(`/tracks/${track_id}`);
+
+    return track;
+  }
+
+  async getAudioFeatures(track_id) {
+    console.log(`getAudioFeatures: ${track_id}`);
+
+    const features = await this.get(`/audio-features/${track_id}`);
+
+    return features;
   }
 }
 
