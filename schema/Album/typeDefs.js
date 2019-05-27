@@ -1,13 +1,17 @@
 import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
+  extend type Query {
+    album(album_id: String!): Album
+  }
+
   type Album {
     id: String!
     name: String!
     album_type: String!
     artists: [Artist]!
     total_tracks: Int!
-    tracks: [Tracks]
+    tracks: [Track]
     label: String!
     popularity: Int!
     release_date: String!
@@ -26,15 +30,6 @@ const typeDefs = gql`
   type Copyrights {
     text: String!
     type: String!
-  }
-
-  type ExternalIds {
-    upc: String!
-  }
-
-  type Tracks {
-    href: String!
-    items: [Track!]
   }
 `;
 
