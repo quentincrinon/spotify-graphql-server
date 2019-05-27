@@ -41,6 +41,14 @@ class SpotifyAPI extends RESTDataSource {
 
     return user;
   }
+
+  async getCurrentUser() {
+    console.log(`getCurrentUser`);
+
+    const user = await this.get(`me`);
+
+    return user;
+  }
 }
 
 export default SpotifyAPI;
