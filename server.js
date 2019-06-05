@@ -12,6 +12,10 @@ import {
 } from './schema/Artist';
 import { typeDefs as Album, resolvers as AlbumResolvers } from './schema/Album';
 import { typeDefs as Track, resolvers as TrackResolvers } from './schema/Track';
+import {
+  typeDefs as Playlist,
+  resolvers as PlaylistResolvers
+} from './schema/Playlist';
 import SpotifyAPI from './data-sources/Spotify';
 import { mergeDeep } from 'apollo-utilities';
 
@@ -31,13 +35,14 @@ const Mutation = gql`
 `;
 
 const server = new ApolloServer({
-  typeDefs: [Query, Mutation, Shared, User, Artist, Album, Track],
+  typeDefs: [Query, Mutation, Shared, User, Artist, Album, Track, Playlist],
   resolvers: mergeDeep(
     SharedResolvers,
     UserResolvers,
     ArtistResolvers,
     AlbumResolvers,
-    TrackResolvers
+    TrackResolvers,
+    PlaylistResolvers
   ),
   dataSources: () => ({
     spotifyAPI: new SpotifyAPI()

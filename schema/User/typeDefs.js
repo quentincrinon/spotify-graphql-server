@@ -8,7 +8,7 @@ const typeDefs = gql`
 
   type User {
     id: String!
-    display_name: String!
+    display_name: String
     type: String!
     uri: String!
     images: [Image]
