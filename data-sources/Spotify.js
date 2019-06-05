@@ -137,6 +137,77 @@ class SpotifyAPI extends RESTDataSource {
 
     return features;
   }
+
+  /**
+   *
+   * PLAYLIST
+   */
+
+  async getPlaylist(playlist_id) {
+    console.log(`getPlaylist: ${playlist_id}`);
+
+    const playlist = await this.get(`/playlists/${playlist_id}`);
+
+    return playlist;
+  }
+
+  async getUserPlaylists(user_id) {
+    console.log(`getUserPlaylists: ${user_id}`);
+
+    const playlists = await this.get(`/users/${user_id}/playlists`);
+
+    return playlists.items;
+  }
+
+  async createPlaylist(options) {
+    console.log(`createPlaylist: ${options.name}`);
+
+    const playlist = await this.post(`/playlists`, {
+      ...options
+    });
+
+    return playlist;
+  }
+
+  async updatePlaylistDetails(playlist_id, options) {
+    console.log(`updatePlaylist: ${playlist_id} - ${options.name}`);
+
+    const playlist = await this.put(`/playlists/${playlist_id}`, {
+      ...options
+    });
+
+    return playlist;
+  }
+
+  async addTracksToPlaylist(playlist_id, params) {
+    console.log(`addTracksToPlaylist: ${playlist_id}`);
+
+    const response = await this.post(`/playlists/${playlist_id}/tracks`, {
+      ...params
+    });
+
+    return response.snapshot_id;
+  }
+
+  async deletePlaylistTracks(playlist_id, tracks) {
+    console.log(`deletePlaylistTracks: ${playlist_id}`);
+
+    const response = await this.delete(`/playlists/${playlist_id}/tracks`, {
+      tracks
+    });
+
+    return response.snapshot_id;
+  }
+
+  async reorderTracks(playlist_id, options) {
+    console.log(`reorderTracks: ${playlist_id}`);
+
+    const response = await this.put(`/playlists/${playlist_id}/tracks`, {
+      ...options
+    });
+
+    return response.snapshot_id;
+  }
 }
 
 export default SpotifyAPI;
