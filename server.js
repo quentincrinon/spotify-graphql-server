@@ -13,13 +13,17 @@ import {
 import { typeDefs as Album, resolvers as AlbumResolvers } from './schema/Album';
 import { typeDefs as Track, resolvers as TrackResolvers } from './schema/Track';
 import {
+  typeDefs as Browse,
+  resolvers as BrowseResolvers
+} from './schema/Browse';
+import {
   typeDefs as Playlist,
   resolvers as PlaylistResolvers
 } from './schema/Playlist';
 import SpotifyAPI from './data-sources/Spotify';
 import { mergeDeep } from 'apollo-utilities';
 
-const GRAPHQL_PORT = 3001;
+const GRAPHQL_PORT = 3006;
 
 // Just to define Query and Mutation type but other query / mutation non-related with any schema can be here
 const Query = gql`
@@ -35,13 +39,24 @@ const Mutation = gql`
 `;
 
 const server = new ApolloServer({
-  typeDefs: [Query, Mutation, Shared, User, Artist, Album, Track, Playlist],
+  typeDefs: [
+    Query,
+    Mutation,
+    Shared,
+    User,
+    Artist,
+    Album,
+    Track,
+    Browse,
+    Playlist
+  ],
   resolvers: mergeDeep(
     SharedResolvers,
     UserResolvers,
     ArtistResolvers,
     AlbumResolvers,
     TrackResolvers,
+    BrowseResolvers,
     PlaylistResolvers
   ),
   dataSources: () => ({
