@@ -27,6 +27,22 @@ const typeDefs = gql`
     uri: String!
   }
 
+  type SimplifiedAlbum {
+    id: String!
+    name: String!
+    album_group: String
+    album_type: String!
+    artists: [Artist]!
+    available_markets: [String]
+    external_urls: Url
+    href: String!
+    images: [Image]
+    release_date: String!
+    release_date_precision: String
+    type: String!
+    uri: String!
+  }
+
   type Copyrights {
     text: String!
     type: String!

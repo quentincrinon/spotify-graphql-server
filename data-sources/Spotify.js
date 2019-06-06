@@ -1,5 +1,6 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 import client_credentials from './clientCredentials';
+import { optionsToQueryString } from './helpers';
 
 let awaitingAuthorization;
 
@@ -207,6 +208,67 @@ class SpotifyAPI extends RESTDataSource {
     });
 
     return response.snapshot_id;
+  }
+
+  /**
+   *
+   * BROWSE
+   */
+
+  async getCategories(args) {
+    console.log(`getCategories`);
+
+    const response = await this.get(
+      `/browse/categories?${optionsToQueryString(args)}`
+    );
+
+    return response.categories.items;
+  }
+
+  async getCategory(category_id) {
+    console.log(`getCategory: ${category_id}`);
+
+    const category = await this.get(`/browse/categories/${category_id}`);
+
+    return category;
+  }
+
+  async getCategoryPlaylists(category_id, args) {
+    console.log(`getCategoryPlaylists: ${category_id}`);
+
+    const response = await this.get(
+      `/browse/categories/${category_id}/playlists?${optionsToQueryString(
+        args
+      )}`
+    );
+
+    return response.playlists.items;
+  }
+
+  async getFeaturedPlaylists(args) {
+    console.log(`getFeaturedPlaylists`);
+
+    const response = await this.get(
+      `/browse/featured-playlists?${optionsToQueryString(args)}`
+    );
+
+    return {
+      message: response.message,
+      playlists: response.playlists.items
+    };
+  }
+
+  async getNewReleases(args) {
+    console.log(`getNewReleases`);
+
+    const response = await this.get(
+      `/browse/new-releases?${optionsToQueryString(args)}`
+    );
+
+    return {
+      message: response.message,
+      albums: response.albums.items
+    };
   }
 }
 
