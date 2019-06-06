@@ -20,6 +20,10 @@ import {
   typeDefs as Playlist,
   resolvers as PlaylistResolvers
 } from './schema/Playlist';
+import {
+  typeDefs as Library,
+  resolvers as LibraryResolvers
+} from './schema/Playlist';
 import SpotifyAPI from './data-sources/Spotify';
 import { mergeDeep } from 'apollo-utilities';
 
@@ -48,7 +52,8 @@ const server = new ApolloServer({
     Album,
     Track,
     Browse,
-    Playlist
+    Playlist,
+    Library
   ],
   resolvers: mergeDeep(
     SharedResolvers,
@@ -57,7 +62,8 @@ const server = new ApolloServer({
     AlbumResolvers,
     TrackResolvers,
     BrowseResolvers,
-    PlaylistResolvers
+    PlaylistResolvers,
+    LibraryResolvers
   ),
   dataSources: () => ({
     spotifyAPI: new SpotifyAPI()

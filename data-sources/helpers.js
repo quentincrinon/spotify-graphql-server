@@ -2,7 +2,8 @@ const paramsMap = {
   country: 'country',
   locale: 'locale',
   offset: 'offset',
-  limit: 'limit'
+  limit: 'limit',
+  market: 'market'
 };
 
 const optionsToQueryString = options =>
