@@ -3,11 +3,12 @@ import { gql } from 'apollo-server-express';
 const typeDefs = gql`
   extend type Query {
     playlist(playlist_id: String!): Playlist
+    currentUserPlaylists: [SimplifiedPlaylist]
     userPlaylists(user_id: String!): [SimplifiedPlaylist]
   }
 
   extend type Mutation {
-    createPlaylist(options: PlaylistInput!): Playlist
+    createPlaylist(user_id: ID!, options: PlaylistInput!): Playlist
     updatePlaylistDetails(
       playlist_id: String!
       options: PlaylistInput!
@@ -72,7 +73,7 @@ const typeDefs = gql`
 
   input PlaylistInput {
     name: String!
-    description: String!
+    description: String = ""
     public: Boolean = false
   }
 

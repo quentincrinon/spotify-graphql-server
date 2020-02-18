@@ -1,29 +1,5 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
-import client_credentials from './clientCredentials';
 import { optionsToQueryString } from './helpers';
-
-let awaitingAuthorization;
-
-const getToken = () => {
-  if (awaitingAuthorization && !client_credentials.isExpired()) {
-    // use existing promise, if not expired
-    return awaitingAuthorization;
-  }
-  if (!awaitingAuthorization || client_credentials.isExpired()) {
-    awaitingAuthorization = new Promise((resolve, reject) => {
-      client_credentials
-        .authenticate()
-        .then(token => {
-          token = 'Bearer ' + token.access_token;
-          resolve(token);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
-  return awaitingAuthorization;
-};
 
 class SpotifyAPI extends RESTDataSource {
   constructor() {
@@ -31,8 +7,8 @@ class SpotifyAPI extends RESTDataSource {
     this.baseURL = 'https://api.spotify.com/v1/';
   }
 
-  async willSendRequest(request) {
-    request.headers.set('Authorization', await getToken());
+  willSendRequest(request) {
+    request.headers.set('Authorization', 'Bearer ' + this.context.authToken);
   }
 
   /**
@@ -152,6 +128,14 @@ class SpotifyAPI extends RESTDataSource {
     return playlist;
   }
 
+  async getCurrentUserPlaylists() {
+    console.log(`getCurrentUserPlaylists`);
+
+    const playlists = await this.get(`/me/playlists`);
+
+    return playlists.items;
+  }
+
   async getUserPlaylists(user_id) {
     console.log(`getUserPlaylists: ${user_id}`);
 
@@ -160,12 +144,16 @@ class SpotifyAPI extends RESTDataSource {
     return playlists.items;
   }
 
-  async createPlaylist(options) {
+  async createPlaylist(user_id, options) {
     console.log(`createPlaylist: ${options.name}`);
 
-    const playlist = await this.post(`/playlists`, {
+    console.log({ ...options });
+
+    const playlist = await this.post(`/users/${user_id}/playlists`, {
       ...options
     });
+
+    console.log(playlist);
 
     return playlist;
   }

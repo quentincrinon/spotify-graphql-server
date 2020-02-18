@@ -3,11 +3,13 @@ const resolvers = {
     playlist: async (_source, { playlist_id }, { dataSources }) =>
       dataSources.spotifyAPI.getPlaylist(playlist_id),
     userPlaylists: async (_source, { user_id }, { dataSources }) =>
-      dataSources.spotifyAPI.getUserPlaylists(user_id)
+      dataSources.spotifyAPI.getUserPlaylists(user_id),
+    currentUserPlaylists: async (_source, _args, { dataSources }) =>
+      dataSources.spotifyAPI.getCurrentUserPlaylists()
   },
   Mutation: {
-    createPlaylist: (_source, args, { dataSources }) =>
-      dataSources.spotifyAPI.createPlaylist(args.options),
+    createPlaylist: (_source, { user_id, options }, { dataSources }) =>
+      dataSources.spotifyAPI.createPlaylist(user_id, options),
     updatePlaylistDetails: (
       _source,
       { playlist_id, options },

@@ -67,6 +67,9 @@ const server = new ApolloServer({
   ),
   dataSources: () => ({
     spotifyAPI: new SpotifyAPI()
+  }),
+  context: ({ req }) => ({
+    authToken: req.headers.authorization || req.headers.Authorization
   })
 });
 
