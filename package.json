@@ -4,28 +4,28 @@
   "description": "GraphQL server for Spotify API",
   "main": "server.js",
   "dependencies": {
-    "apollo-datasource-rest": "^0.4.0",
-    "apollo-server-express": "2.5.0",
+    "apollo-datasource-rest": "^0.7.0",
+    "apollo-server-express": "2.10.1",
     "body-parser": "^1.18.2",
-    "casual": "^1.5.17",
+    "casual": "^1.6.2",
     "connect": "^3.7.0",
-    "dotenv": "8.0.0",
-    "graphql": "^14.3.1",
-    "graphql-tools": "^4.0.4",
-    "lodash": "^4.17.4",
+    "dotenv": "8.2.0",
+    "graphql": "^14.6.0",
+    "graphql-tools": "^4.0.6",
+    "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
     "qs-middleware": "^1.0.3",
-    "sequelize": "^5.8.6"
+    "sequelize": "^5.21.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-source-map-support": "^1.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-source-map-support": "^2.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-3": "^6.24.1",
-    "nodemon": "^1.19.1"
+    "nodemon": "^2.0.2"
   },
   "babel": {
     "presets": [
