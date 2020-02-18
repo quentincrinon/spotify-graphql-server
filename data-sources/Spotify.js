@@ -270,6 +270,59 @@ class SpotifyAPI extends RESTDataSource {
       albums: response.albums.items
     };
   }
+
+  /**
+   *
+   * LIBRARY
+   */
+
+  async getCurrentUserAlbums(args) {
+    console.log(`getCurrentUserAlbums`);
+
+    const response = await this.get(`/me/albums?${optionsToQueryString(args)}`);
+
+    return response.items;
+  }
+
+  async getCurrentUserTracks(args) {
+    console.log(`getCurrentUserTracks`);
+
+    const response = await this.get(`/me/tracks?${optionsToQueryString(args)}`);
+
+    return response.items;
+  }
+
+  async addCurrentUserAlbums(ids) {
+    console.log(`addCurrentUserAlbums`);
+
+    const response = await this.put(`/me/albums?ids=${ids}`);
+
+    return response;
+  }
+
+  async addCurrentUserTracks(ids) {
+    console.log(`addCurrentUserTracks`);
+
+    const response = await this.put(`/me/tracks?ids=${ids}`);
+
+    return response;
+  }
+
+  async removeCurrentUserAlbums(ids) {
+    console.log(`removeCurrentUserAlbums`);
+
+    const response = await this.delete(`/me/albums?ids=${ids}`);
+
+    return response;
+  }
+
+  async removeCurrentUserTracks(ids) {
+    console.log(`removeCurrentUserTracks`);
+
+    const response = await this.delete(`/me/tracks?ids=${ids}`);
+
+    return response;
+  }
 }
 
 export default SpotifyAPI;
